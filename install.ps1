@@ -24,7 +24,7 @@
 [CmdletBinding(SupportsShouldProcess)]
 param(
     # Scheme to make the default for all Windows Terminal profiles
-    [ValidateSet('Dragon', 'Wave')]
+    [ValidateSet('Dragon', 'Wave', 'Lotus')]
     [string]$Variant = 'Dragon',
 
     # Add the schemes but leave every profile's colour scheme alone
@@ -87,7 +87,7 @@ if (-not $TerminalSettingsPath) {
     $TerminalSettingsPath = $terminalNames.Keys | Where-Object { Test-Path $_ } | Sort-Object
 }
 
-$schemes = 'KanagawaDragon.json', 'KanagawaWave.json' | ForEach-Object {
+$schemes = 'KanagawaDragon.json', 'KanagawaWave.json', 'KanagawaLotus.json' | ForEach-Object {
     Get-Content (Join-Path $PSScriptRoot 'windows-terminal' $_) -Raw | ConvertFrom-Json
 }
 $schemeNames = $schemes.name

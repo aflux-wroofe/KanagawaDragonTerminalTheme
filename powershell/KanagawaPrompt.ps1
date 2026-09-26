@@ -8,7 +8,7 @@
 #   [!] conflicts (red)  [up] / [down] commits ahead of / behind upstream (blue)
 #
 # Colours come from the terminal's 16-colour palette, so the prompt follows
-# whichever variant (Dragon or Wave) the terminal is using. Glyphs are built from
+# whichever variant (Dragon, Wave or Lotus) the terminal is using. Glyphs are built from
 # code points (not literals) so they render the same in PowerShell 5.1, which
 # reads BOM-less files as ANSI, and PowerShell 7.
 
@@ -204,7 +204,7 @@ if (Get-Module PSReadLine) {
         Comment   = "$([char]27)[3;90m"  # fujiGray, italic
         Emphasis  = "$([char]27)[1;94m"  # springBlue: search matches
         Error     = "$([char]27)[31m"    # autumnRed
-        Selection = "$([char]27)[48;2;45;79;103m"  # waveBlue2, shared by both variants
+        Selection = "$([char]27)[7m"          # reverse video: readable on every variant
     }
     # Prediction colours need PSReadLine 2.1+ (bundled with PowerShell 7)
     try { Set-PSReadLineOption -Colors @{ InlinePrediction = "$([char]27)[3;90m" } } catch { }

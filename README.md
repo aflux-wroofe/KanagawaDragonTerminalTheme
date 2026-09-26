@@ -8,6 +8,7 @@
 windows-terminal/
   KanagawaDragon.json    Kanagawa Dragon colour scheme (dark, muted)
   KanagawaWave.json      Kanagawa Wave colour scheme (the standard variant)
+  KanagawaLotus.json     Kanagawa Lotus colour scheme (light)
 powershell/
   profile.ps1            PowerShell tweaks: bold blue directories in ls, loads the prompt
   KanagawaPrompt.ps1     Two-line prompt showing path, git branch/status and command duration
@@ -34,6 +35,7 @@ Options:
 
 ```powershell
 ./install.ps1 -Variant Wave                          # make Wave the default instead of Dragon
+./install.ps1 -Variant Lotus                         # or the light Lotus variant
 ./install.ps1 -FontFace 'CaskaydiaCove Nerd Font'    # set the font for all profiles
 ./install.ps1 -SkipDefaultScheme                     # add the schemes without applying them
 ./install.ps1 -WhatIf                                # preview changes
@@ -44,8 +46,8 @@ The installer is safe to re-run: schemes are replaced by name, the profile hook 
 ### Manual install
 
 1. Open Windows Terminal settings → **Open JSON file**.
-2. Paste the contents of `windows-terminal/KanagawaDragon.json` and/or `windows-terminal/KanagawaWave.json` into the `schemes` array.
-3. Set `"colorScheme": "Kanagawa Dragon"` (or `"Kanagawa Wave"`) on a profile or under `profiles.defaults`.
+2. Paste the contents of any of the `windows-terminal/Kanagawa*.json` files into the `schemes` array.
+3. Set `"colorScheme": "Kanagawa Dragon"` (or `"Kanagawa Wave"` / `"Kanagawa Lotus"`) on a profile or under `profiles.defaults`.
 4. Optionally add `. "C:\path\to\KanagawaTerminalTheme\powershell\profile.ps1"` to your `$PROFILE`.
 
 ### Oh My Posh
