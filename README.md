@@ -1,6 +1,6 @@
 # Kanagawa Terminal Theme
 
-[Kanagawa](https://github.com/rebelot/kanagawa.nvim) colour schemes for Windows Terminal, plus a matching two-line Nerd Font prompt: either as a PowerShell profile or as an [Oh My Posh](https://ohmyposh.dev/) theme for any shell.
+[Kanagawa](https://github.com/rebelot/kanagawa.nvim) and [Kansō](https://github.com/webhooked/kanso.nvim) colour schemes for Windows Terminal, plus a matching two-line Nerd Font prompt: either as a PowerShell profile or as an [Oh My Posh](https://ohmyposh.dev/) theme for any shell.
 
 ## What's included
 
@@ -9,6 +9,10 @@ windows-terminal/
   KanagawaDragon.json    Kanagawa Dragon colour scheme (dark, muted)
   KanagawaWave.json      Kanagawa Wave colour scheme (the standard variant)
   KanagawaLotus.json     Kanagawa Lotus colour scheme (light)
+  KansoZen.json          Kanso Zen colour scheme (deep, rich dark)
+  KansoInk.json          Kanso Ink colour scheme (balanced dark)
+  KansoMist.json         Kanso Mist colour scheme (soft, muted dark)
+  KansoPearl.json        Kanso Pearl colour scheme (light)
 powershell/
   profile.ps1            PowerShell tweaks: bold blue directories in ls, loads the prompt
   KanagawaPrompt.ps1     Two-line prompt showing path, git branch/status and command duration
@@ -36,6 +40,7 @@ Options:
 ```powershell
 ./install.ps1 -Variant Wave                          # make Wave the default instead of Dragon
 ./install.ps1 -Variant Lotus                         # or the light Lotus variant
+./install.ps1 -Variant Ink                           # or a Kanso variant: Zen, Ink, Mist, Pearl
 ./install.ps1 -FontFace 'CaskaydiaCove Nerd Font'    # set the font for all profiles
 ./install.ps1 -SkipDefaultScheme                     # add the schemes without applying them
 ./install.ps1 -WhatIf                                # preview changes
@@ -46,8 +51,8 @@ The installer is safe to re-run: schemes are replaced by name, the profile hook 
 ### Manual install
 
 1. Open Windows Terminal settings → **Open JSON file**.
-2. Paste the contents of any of the `windows-terminal/Kanagawa*.json` files into the `schemes` array.
-3. Set `"colorScheme": "Kanagawa Dragon"` (or `"Kanagawa Wave"` / `"Kanagawa Lotus"`) on a profile or under `profiles.defaults`.
+2. Paste the contents of any of the `windows-terminal/*.json` files into the `schemes` array.
+3. Set `"colorScheme": "Kanagawa Dragon"` (or `"Kanagawa Wave"`, `"Kanagawa Lotus"`, `"Kanso Zen"`, `"Kanso Ink"`, `"Kanso Mist"`, `"Kanso Pearl"`) on a profile or under `profiles.defaults`.
 4. Optionally add `. "C:\path\to\KanagawaTerminalTheme\powershell\profile.ps1"` to your `$PROFILE`.
 
 ### Oh My Posh
@@ -62,7 +67,7 @@ oh-my-posh init pwsh --config 'C:\path\to\KanagawaTerminalTheme\oh-my-posh\kanag
 eval "$(oh-my-posh init bash --config ~/KanagawaTerminalTheme/oh-my-posh/kanagawa.omp.json)"   # or zsh, fish, ...
 ```
 
-The theme uses the terminal's 16 ANSI colours, like the PowerShell prompt, so it follows whichever Kanagawa scheme the terminal is set to. For the matching colours outside Windows Terminal, use a Kanagawa scheme for your terminal from [kanagawa.nvim's extras](https://github.com/rebelot/kanagawa.nvim/tree/master/extras).
+The theme uses the terminal's 16 ANSI colours, like the PowerShell prompt, so it follows whichever Kanagawa or Kanso scheme the terminal is set to. For the matching colours outside Windows Terminal, use a scheme for your terminal from [kanagawa.nvim's extras](https://github.com/rebelot/kanagawa.nvim/tree/master/extras) or [kanso.nvim's extras](https://github.com/webhooked/kanso.nvim/tree/main/extras).
 
 ## Prompt
 
@@ -83,7 +88,7 @@ These settings are for the PowerShell prompt only. With Oh My Posh, edit `kanaga
 
 ## Credits
 
-Colour palettes from [kanagawa.nvim](https://github.com/rebelot/kanagawa.nvim) by rebelot.
+Colour palettes from [kanagawa.nvim](https://github.com/rebelot/kanagawa.nvim) by rebelot and [kanso.nvim](https://github.com/webhooked/kanso.nvim) by webhooked.
 
 ## License
 

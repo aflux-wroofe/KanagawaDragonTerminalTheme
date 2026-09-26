@@ -1,7 +1,7 @@
 #Requires -Version 7.0
 <#
 .SYNOPSIS
-    Installs the Kanagawa colour schemes into Windows Terminal and hooks the
+    Installs the Kanagawa and Kanso colour schemes into Windows Terminal and hooks the
     Kanagawa profile (ls colours + prompt) into your PowerShell profiles.
 
 .DESCRIPTION
@@ -24,7 +24,7 @@
 [CmdletBinding(SupportsShouldProcess)]
 param(
     # Scheme to make the default for all Windows Terminal profiles
-    [ValidateSet('Dragon', 'Wave', 'Lotus')]
+    [ValidateSet('Dragon', 'Wave', 'Lotus', 'Zen', 'Ink', 'Mist', 'Pearl')]
     [string]$Variant = 'Dragon',
 
     # Add the schemes but leave every profile's colour scheme alone
@@ -73,7 +73,8 @@ function Backup-File([string]$Path) {
 }
 
 $check = [char]0x2713
-Write-Host "`n  Kanagawa $([char]0x00B7) $Variant" -ForegroundColor Cyan
+$family = if ($Variant -in 'Zen', 'Ink', 'Mist', 'Pearl') { 'Kanso' } else { 'Kanagawa' }
+Write-Host "`n  $family $([char]0x00B7) $Variant" -ForegroundColor Cyan
 if ($WhatIfPreference) { Write-Host '  dry run: nothing will be written' -ForegroundColor DarkGray }
 
 # ---------------------------------------------------------------- Windows Terminal
@@ -87,11 +88,12 @@ if (-not $TerminalSettingsPath) {
     $TerminalSettingsPath = $terminalNames.Keys | Where-Object { Test-Path $_ } | Sort-Object
 }
 
-$schemes = 'KanagawaDragon.json', 'KanagawaWave.json', 'KanagawaLotus.json' | ForEach-Object {
-    Get-Content (Join-Path $PSScriptRoot 'windows-terminal' $_) -Raw | ConvertFrom-Json
+$schemeFiles = 'KanagawaDragon', 'KanagawaWave', 'KanagawaLotus', 'KansoZen', 'KansoInk', 'KansoMist', 'KansoPearl'
+$schemes = $schemeFiles | ForEach-Object {
+    Get-Content (Join-Path $PSScriptRoot 'windows-terminal' "$_.json") -Raw | ConvertFrom-Json
 }
 $schemeNames = $schemes.name
-$defaultScheme = "Kanagawa $Variant"
+$defaultScheme = "$family $Variant"
 $terminalFonts = @()
 
 if (-not $TerminalSettingsPath) {
@@ -116,7 +118,7 @@ foreach ($settingsFile in $TerminalSettingsPath) {
         elseif ((& $fingerprint $list[$index]) -ne (& $fingerprint $scheme)) { $list[$index] = $scheme; $updated++ }
     }
     $settings | Add-Member -NotePropertyName schemes -NotePropertyValue $list.ToArray() -Force
-    $schemeSummary = ($schemeNames -replace '^Kanagawa ') -join ', '
+    $schemeSummary = ($schemeNames -replace '^(Kanagawa|Kanso) ') -join ', '
     if ($added) { Write-Result 'Schemes added' $schemeSummary }
     elseif ($updated) { Write-Result 'Schemes updated' $schemeSummary }
     else { Write-Result 'Schemes' "$schemeSummary, already installed" same }
