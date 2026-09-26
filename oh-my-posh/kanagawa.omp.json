@@ -1,0 +1,107 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
+  "final_space": true,
+  "shell_integration": true,
+  "pwd": "osc99",
+  "console_title_template": "{{ .Folder }}",
+  "palette": {
+    "muted": "darkGray",
+    "blue": "blue",
+    "leaf": "lightBlue",
+    "wave": "lightBlue",
+    "violet": "magenta",
+    "green": "green",
+    "yellow": "yellow",
+    "aqua": "cyan",
+    "red": "red"
+  },
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "p:muted",
+          "template": "╭─ "
+        },
+        {
+          "type": "root",
+          "style": "plain",
+          "foreground": "p:red",
+          "template": "  "
+        },
+        {
+          "type": "path",
+          "style": "plain",
+          "foreground": "p:blue",
+          "template": "<p:wave>󰞍</>  {{ .Path }}",
+          "options": {
+            "style": "agnoster_short",
+            "max_depth": 3,
+            "home_icon": "~",
+            "right_format": "<b><p:leaf>%s</></b>"
+          }
+        },
+        {
+          "type": "git",
+          "style": "plain",
+          "foreground": "p:violet",
+          "exclude_folders": ["^\\\\\\\\"],
+          "template": " <p:muted>on</> {{ .HEAD }}{{ if .Working.Unmerged }}  <p:red>  {{ .Working.Unmerged }}</>{{ end }}{{ $staged := add .Staging.Added .Staging.Modified .Staging.Deleted }}{{ if $staged }}  <p:green>  {{ $staged }}</>{{ end }}{{ $modified := add .Working.Modified .Working.Deleted }}{{ if $modified }}  <p:yellow>  {{ $modified }}</>{{ end }}{{ if .Working.Untracked }}  <p:muted>  {{ .Working.Untracked }}</>{{ end }}{{ if .Ahead }}  <p:wave>  {{ .Ahead }}</>{{ end }}{{ if .Behind }}  <p:wave>  {{ .Behind }}</>{{ end }}",
+          "options": {
+            "branch_icon": "  "
+          }
+        },
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "p:aqua",
+          "template": "{{ if .Venv }}  <p:muted>via</>   {{ .Venv }}{{ end }}",
+          "options": {
+            "display_mode": "environment",
+            "fetch_virtual_env": true,
+            "home_enabled": true
+          }
+        },
+        {
+          "type": "executiontime",
+          "style": "plain",
+          "foreground": "p:yellow",
+          "template": "  <p:muted>took</>   {{ .FormattedMs }}",
+          "options": {
+            "threshold": 2000,
+            "style": "austin"
+          }
+        },
+        {
+          "type": "status",
+          "style": "plain",
+          "foreground": "p:red",
+          "template": "  ✘ {{ .Code }}"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "p:wave",
+          "foreground_templates": ["{{ if gt .Code 0 }}p:red{{ end }}"],
+          "template": "<p:muted>╰─</>❯"
+        }
+      ]
+    }
+  ],
+  "secondary_prompt": {
+    "foreground": "p:muted",
+    "template": "   │ "
+  }
+}

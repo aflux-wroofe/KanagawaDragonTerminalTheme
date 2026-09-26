@@ -9,8 +9,8 @@
     marked block that gets rewritten, never duplicated. Every file it changes
     is backed up next to the original first.
 
-    Your PowerShell profiles dot-source profile.ps1 from this folder, so keep the
-    repo where it is (or run the installer again after moving it).
+    Your PowerShell profiles dot-source powershell\profile.ps1 from this repo, so
+    keep the repo where it is (or run the installer again after moving it).
 
 .EXAMPLE
     ./install.ps1                      # Dragon as the default scheme
@@ -88,7 +88,7 @@ if (-not $TerminalSettingsPath) {
 }
 
 $schemes = 'KanagawaDragon.json', 'KanagawaWave.json' | ForEach-Object {
-    Get-Content (Join-Path $PSScriptRoot $_) -Raw | ConvertFrom-Json
+    Get-Content (Join-Path $PSScriptRoot 'windows-terminal' $_) -Raw | ConvertFrom-Json
 }
 $schemeNames = $schemes.name
 $defaultScheme = "Kanagawa $Variant"
@@ -185,7 +185,7 @@ if (-not $ProfilePath) {
 
 $begin = '# >>> KanagawaTerminalTheme >>>'
 $end = '# <<< KanagawaTerminalTheme <<<'
-$kanagawaProfile = (Join-Path $PSScriptRoot 'profile.ps1').Replace("'", "''")
+$kanagawaProfile = (Join-Path $PSScriptRoot 'powershell' 'profile.ps1').Replace("'", "''")
 $block = @(
     $begin
     "if (Test-Path '$kanagawaProfile') { . '$kanagawaProfile' }"
